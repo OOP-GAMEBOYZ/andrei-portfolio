@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jan Andrei Bulos - Computer Engineering Student</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00f2ff, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color: #fff;
+            font-weight: normal;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #00f2ff;
+        }
+
+        /* Home Section */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('background.jpg') center/cover;
+            background-attachment: fixed;
+        }
+
+        .home-content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .home-logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            border: 3px solid #00f2ff;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.5);
+            animation: fadeInUp 1s ease;
+            object-fit: cover;
+        }
+
+        .home-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00f2ff, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .home-content h2 {
+            font-size: 2rem;
+            color: #00f2ff;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .home-content p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease 0.8s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #00f2ff, #0066ff);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.4);
+        }
+
+        /* About Section */
+        #about {
+            padding: 5rem 5%;
+            background: #0f0f0f;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 20px;
+            border: 3px solid #00f2ff;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #00f2ff;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .education-box {
+            background: rgba(0, 242, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #00f2ff;
+            margin-top: 1.5rem;
+        }
+
+        .education-box h3 {
+            color: #00f2ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .resume-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #00f2ff, #0066ff);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1.5rem;
+        }
+
+        .resume-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 242, 255, 0.4);
+        }
+
+        .resume-button i {
+            margin-right: 0.5rem;
+        }
+
+        /* Skills Section */
+        #skills {
+            padding: 5rem 5%;
+            background: #0a0a0a;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #00f2ff;
+        }
+
+        .skills-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(0, 242, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.2);
+            border-color: #00f2ff;
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            color: #00f2ff;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .skill-card p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Projects Section */
+        #projects {
+            padding: 5rem 5%;
+            background: #0f0f0f;
+        }
+
+        .projects-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(0, 242, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: #00f2ff;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 20px;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            color: #00f2ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info p {
+            color: #999;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 5rem 5%;
+            background: #0a0a0a;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            background: rgba(0, 242, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            min-width: 200px;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: #fff;
+            display: block;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.2);
+            border-color: #00f2ff;
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: #00f2ff;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 2rem 5%;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid rgba(0, 242, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .home-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-img {
+                margin: 0 auto;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <img src="LOGO.png" alt="Logo">
+            <div class="logo-text">
+                <span class="logo-name">Jan Andrei Bulos</span>
+                <span class="logo-subtitle">Computer Engineering</span>
+            </div>
+        </div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="home-content">
+            <img src="logo.png" alt="Logo" class="home-logo">
+            <h1>Jan Andrei Bulos</h1>
+            <h2>Computer Engineering Student</h2>
+            <p>Passionate about technology, innovation, and building solutions for tomorrow</p>
+            <a href="#contact" class="cta-button">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="about-container">
+            <div>
+                <img src="1x1.jpg" alt="Jan Andrei Bulos" class="profile-img">
+            </div>
+            <div class="about-text">
+                <h2>About Me</h2>
+                <p>Hello! I'm Jan Andrei Bulos, a dedicated Computer Engineering student with a passion for technology and innovation. I'm constantly exploring new technologies and developing my skills in hardware and software integration.</p>
+                <p>My goal is to contribute to the advancement of technology through creative problem-solving and continuous learning.</p>
+                <div class="education-box">
+                    <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                    <p><strong>Bulacan State University - Bustos Campus</strong></p>
+                    <p>Bachelor of Science in Computer Engineering</p>
+                    <p>Currently Enrolled</p>
+                </div>
+                <a href="resume.pdf" target="_blank" class="resume-button">
+                    <i class="fas fa-file-pdf"></i>Download My Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fas fa-cogs"></i>
+                <h3>Software & Hardware Knowledge</h3>
+                <p>Understanding of both software development and hardware systems integration</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-code"></i>
+                <h3>Programming</h3>
+                <p>C, C++, Python, and software development</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-comments"></i>
+                <h3>Effective Communication</h3>
+                <p>Clear technical communication and team collaboration</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Web Development</h3>
+                <p>HTML, CSS, JavaScript basics</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Critical Thinking</h3>
+                <p>Analytical problem-solving and logical reasoning</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-tools"></i>
+                <h3>Problem Solving</h3>
+                <p>Analytical thinking and debugging</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="purrfect paw salon.png" alt="Purrfect Paws Salon">
+                </div>
+                <div class="project-info">
+                    <h3>Purrfect Paws Salon</h3>
+                    <p>A POS-like system that helps veterinarians arrange appointment schedules. Features include user-friendly online appointments, service display, and customer appointment details management through a comprehensive website interface.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="POMPOM.png" alt="POMPOM">
+                </div>
+                <div class="project-info">
+                    <h3>POMPOM</h3>
+                    <p>A Pomodoro timer application designed to boost student efficiency during study sessions. Helps students manage their time effectively using the proven Pomodoro technique with a friendly and engaging interface.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="SCES.png" alt="SCES">
+                </div>
+                <div class="project-info">
+                    <h3>SCES - Smart Classroom Energy Saver</h3>
+                    <p>An ongoing project, About a IoT-based Human Detection System using Computer Vision for efficient power management. Aims to reduce energy wastage in classrooms through intelligent monitoring and automated control systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p>Feel free to reach out to me through any of these platforms</p>
+            <div class="contact-links">
+                <a href="https://www.facebook.com/Jandreibulos/" target="_blank" class="contact-card">
+                    <i class="fab fa-facebook"></i>
+                    <h3>Facebook</h3>
+                    <p>Connect with me</p>
+                </a>
+                <a href="mailto:bulosjanandrei28@gmail.com" class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Gmail</h3>
+                    <p>bulosjanandrei28@gmail.com</p>
+                </a>
+                <a href="tel:09107329322" class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Phone</h3>
+                    <p>09107329322</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Jan Andrei Bulos. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
